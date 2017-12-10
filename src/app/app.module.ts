@@ -3,16 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { ClarityModule } from 'clarity-angular';
 
+import { ROUTING } from './app.routing';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     ClarityModule,
+    ROUTING,
   ],
   providers: [],
   bootstrap: [AppComponent]
