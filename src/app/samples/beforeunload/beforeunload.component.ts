@@ -12,17 +12,12 @@ export class BeforeunloadComponent implements PreventBeforeunload {
   data = '';
 
   preventBeforeunload() {
-    if (this.data) {
-      return true;
-    }
-    return false;
+    return !!this.data;
   }
 
   @HostListener('window:beforeunload', ['$event'])
   beforeUnload(e: Event) {
-    console.log(this.preventBeforeunload(), e);
     if (this.preventBeforeunload()) {
-      e.cancelBubble = true;
       e.returnValue = true;
     }
   }

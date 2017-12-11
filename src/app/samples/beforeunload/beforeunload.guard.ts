@@ -5,19 +5,15 @@ import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 
 export interface PreventBeforeunload {
-    preventBeforeunload: () => Observable<boolean> | boolean;
+    preventBeforeunload: () => boolean;
 }
 
 @Injectable()
 export class BeforeunloadGuard implements CanDeactivate<PreventBeforeunload> {
     canDeactivate(component: PreventBeforeunload) {
-        let o = component.preventBeforeunload();
-        if (typeof o === 'boolean') {
-            o = of(o);
+        if (!component.preventBeforeunload()) {
+            return true;
         }
-        console.log(o);
-        return o.pipe(
-            map(v => v ? confirm('このページを離れてもよろしいですか？\n行った変更が保存されない可能性があります。') : true),
-        );
+        return confirm('このページを離れてもよろしいですか？\n行った変更が保存されない可能性があります。');
     }
 }
