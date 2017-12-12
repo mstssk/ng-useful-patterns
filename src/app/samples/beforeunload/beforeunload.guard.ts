@@ -1,6 +1,3 @@
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 
@@ -11,9 +8,9 @@ export interface PreventBeforeunload {
 @Injectable()
 export class BeforeunloadGuard implements CanDeactivate<PreventBeforeunload> {
     canDeactivate(component: PreventBeforeunload) {
-        if (!component.preventBeforeunload()) {
-            return true;
+        if (component.preventBeforeunload()) {
+            return confirm('Do you want to leave this page?\nChanges you made may not be saved.');
         }
-        return confirm('このページを離れてもよろしいですか？\n行った変更が保存されない可能性があります。');
+        return true;
     }
 }
