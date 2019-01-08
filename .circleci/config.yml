@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:8-browsers
+    environment:
+      - hoge: v1
     steps:
       - checkout
       - run: node -v && npm -v
