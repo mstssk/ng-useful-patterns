@@ -14,6 +14,10 @@ jobs:
           key: npm-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
+      - save_cache:
+          key: hoge-cache-{{ checksum "~/hoge" }}
+          paths:
+            - ./node_modules
       - run: npm run lint
       - run: npm test
       # - run: npm run e2e
